@@ -9,6 +9,10 @@
     "build": "npx bili",
     "start": "echo \"Nothing\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kangoula/vue-loading-state"
+  },
   "files": [
     "dist/*"
   ],
