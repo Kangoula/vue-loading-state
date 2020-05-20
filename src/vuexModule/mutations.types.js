@@ -1,0 +1,2 @@
+export const REMOVE_LOADING = 'REMOVE_LOADING'
+export const SET_LOADING = 'SET_LOADING'
