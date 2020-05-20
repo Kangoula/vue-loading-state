@@ -5,16 +5,16 @@ export default (moduleName) => {
         return this.$store.getters[`${moduleName}/isLoading`](key)
       },
 
-      $startLoading (key) {
-        return this.$store.dispatch(`${moduleName}/startLoading`, key)
+      async $startLoading (key) {
+        await this.$store.dispatch(`${moduleName}/startLoading`, key)
       },
 
-      $endLoading (key) {
-        return this.$store.dispatch(`${moduleName}/endLoading`, key)
+      async $endLoading (key) {
+        await this.$store.dispatch(`${moduleName}/endLoading`, key)
       },
 
-      $toggleLoading (key) {
-        return this.$store.dispatch(`${moduleName}/toggleLoading`, key)
+      async $toggleLoading (key) {
+        await this.$store.dispatch(`${moduleName}/toggleLoading`, key)
       }
     }
   }

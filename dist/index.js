@@ -1,5 +1,5 @@
 /*!
- * vue-loading-state v0.0.1
+ * vue-loading-state v0.0.2
  * (c) Guillaume Denis <guillaume.denis@two-i.fr>
  * Released under the MIT License.
  */
@@ -8,34 +8,29 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var Vue = _interopDefault(require('vue'));
-var mutations_types_js = require('@/store/mutations.types.js');
 
 var REMOVE_LOADING = 'REMOVE_LOADING';
 var SET_LOADING = 'SET_LOADING';
 
 var actions = {
-  resetState: function resetState(_ref) {//
-
-    var commit = _ref.commit;
-  },
-  startLoading: function startLoading(_ref2, key) {
-    var state = _ref2.state,
-        commit = _ref2.commit;
+  startLoading: function startLoading(_ref, key) {
+    var state = _ref.state,
+        commit = _ref.commit;
     commit(SET_LOADING, {
       key: key,
       value: true
     });
   },
-  stopLoading: function stopLoading(_ref3, key) {
-    var commit = _ref3.commit;
+  endLoading: function endLoading(_ref2, key) {
+    var commit = _ref2.commit;
     commit(SET_LOADING, {
       key: key,
       value: false
     });
   },
-  toggleLoading: function toggleLoading(_ref4, key) {
-    var state = _ref4.state,
-        commit = _ref4.commit;
+  toggleLoading: function toggleLoading(_ref3, key) {
+    var state = _ref3.state,
+        commit = _ref3.commit;
     commit(SET_LOADING, {
       key: key,
       value: !state.entities[key]
@@ -73,16 +68,14 @@ var getDefaultState = function getDefaultState() {
 };
 var state = getDefaultState();
 
-var _RESET_STATE$types$SE;
-var mutations = (_RESET_STATE$types$SE = {}, _defineProperty(_RESET_STATE$types$SE, mutations_types_js.RESET_STATE, function (state) {
-  Object.assign(state, getDefaultState());
-}), _defineProperty(_RESET_STATE$types$SE, SET_LOADING, function (state, _ref) {
+var _types$SET_LOADING$ty;
+var mutations = (_types$SET_LOADING$ty = {}, _defineProperty(_types$SET_LOADING$ty, SET_LOADING, function (state, _ref) {
   var key = _ref.key,
       value = _ref.value;
   Vue.set(state.entities, key, value);
-}), _defineProperty(_RESET_STATE$types$SE, REMOVE_LOADING, function (state, key) {
+}), _defineProperty(_types$SET_LOADING$ty, REMOVE_LOADING, function (state, key) {
   Vue["delete"](state.entities, key);
-}), _RESET_STATE$types$SE);
+}), _types$SET_LOADING$ty);
 
 var createVuexModule = (function (moduleName, store) {
   if (!store) {
@@ -118,6 +111,14 @@ var createVuexModule = (function (moduleName, store) {
   };
 });
 
+function _empty() {}
+
+function _awaitIgnored(value, direct) {
+  if (!direct) {
+    return value && value.then ? value.then(_empty) : Promise.resolve();
+  }
+}
+
 var createPluginMixin = (function (moduleName) {
   return {
     methods: {
@@ -125,13 +126,31 @@ var createPluginMixin = (function (moduleName) {
         return this.$store.getters["".concat(moduleName, "/isLoading")](key);
       },
       $startLoading: function $startLoading(key) {
-        return this.$store.dispatch("".concat(moduleName, "/startLoading"), key);
+        try {
+          var _this2 = this;
+
+          return _awaitIgnored(_this2.$store.dispatch("".concat(moduleName, "/startLoading"), key));
+        } catch (e) {
+          return Promise.reject(e);
+        }
       },
       $endLoading: function $endLoading(key) {
-        return this.$store.dispatch("".concat(moduleName, "/endLoading"), key);
+        try {
+          var _this4 = this;
+
+          return _awaitIgnored(_this4.$store.dispatch("".concat(moduleName, "/endLoading"), key));
+        } catch (e) {
+          return Promise.reject(e);
+        }
       },
       $toggleLoading: function $toggleLoading(key) {
-        return this.$store.dispatch("".concat(moduleName, "/toggleLoading"), key);
+        try {
+          var _this6 = this;
+
+          return _awaitIgnored(_this6.$store.dispatch("".concat(moduleName, "/toggleLoading"), key));
+        } catch (e) {
+          return Promise.reject(e);
+        }
       }
     }
   };

@@ -6,7 +6,7 @@
   "author": "Guillaume Denis <guillaume.denis@two-i.fr>",
   "license": "MIT",
   "scripts": {
-    "build": "echo \"Nothing\" && exit 1",
+    "build": "npx bili",
     "start": "echo \"Nothing\" && exit 1"
   },
   "files": [
