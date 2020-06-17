@@ -25,7 +25,7 @@ export default (moduleName, store) => {
   store.$startLoading = (key) =>
     store.dispatch(`${moduleName}/startLoading`, key)
 
-  store.$endLoading = (key) => store.dispatch(`${moduleName}/stopLoading`, key)
+  store.$endLoading = (key) => store.dispatch(`${moduleName}/endLoading`, key)
 
   store.$toggleLoading = (key) =>
     store.dispatch(`${moduleName}/toggleLoading`, key)
