@@ -1,5 +1,5 @@
 /*!
- * vue-loading-state v1.1.0-rc.1
+ * vue-loading-state v1.1.0-rc.2
  * (c) Guillaume Denis <guillaume.denis@two-i.fr>
  * Released under the MIT License.
  */
@@ -128,7 +128,7 @@ function getComponentName() {
 }
 
 function getKey(key) {
-  return key !== null && key !== void 0 ? key : getComponentName().call(this);
+  return key !== null && key !== void 0 ? key : getComponentName.call(this);
 }
 
 var createPluginMixin = (function (moduleName) {
