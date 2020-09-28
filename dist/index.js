@@ -1,5 +1,5 @@
 /*!
- * vue-loading-state v1.1.0-rc.2
+ * vue-loading-state v1.1.0
  * (c) Guillaume Denis <guillaume.denis@two-i.fr>
  * Released under the MIT License.
  */
