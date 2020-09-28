@@ -1,6 +1,6 @@
 {
   "name": "vue-loading-state",
-  "version": "1.0.1",
+  "version": "1.1.0-0",
   "description": "Centralized loading state management for Vue using Vuex",
   "main": "dist/index.js",
   "author": "Guillaume Denis <guillaume.denis@two-i.fr>",
