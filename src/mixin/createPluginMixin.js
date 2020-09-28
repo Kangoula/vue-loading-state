@@ -7,7 +7,7 @@ function getComponentName() {
 }
 
 function getKey(key) {
-  return key ?? getComponentName().call(this)
+  return key ?? getComponentName.call(this)
 }
 
 export default moduleName => {

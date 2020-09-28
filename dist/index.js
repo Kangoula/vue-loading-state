@@ -1,5 +1,5 @@
 /*!
- * vue-loading-state v1.0.0
+ * vue-loading-state v1.1.0-rc.1
  * (c) Guillaume Denis <guillaume.denis@two-i.fr>
  * Released under the MIT License.
  */
@@ -103,7 +103,7 @@ var createVuexModule = (function (moduleName, store) {
   };
 
   store.$endLoading = function (key) {
-    return store.dispatch("".concat(moduleName, "/stopLoading"), key);
+    return store.dispatch("".concat(moduleName, "/endLoading"), key);
   };
 
   store.$toggleLoading = function (key) {
@@ -119,17 +119,29 @@ function _awaitIgnored(value, direct) {
   }
 }
 
+function getComponentName() {
+  if (this._isVue) {
+    return this.$options.name;
+  }
+
+  return null;
+}
+
+function getKey(key) {
+  return key !== null && key !== void 0 ? key : getComponentName().call(this);
+}
+
 var createPluginMixin = (function (moduleName) {
   return {
     methods: {
       $isLoading: function $isLoading(key) {
-        return this.$store.getters["".concat(moduleName, "/isLoading")](key);
+        return this.$store.getters["".concat(moduleName, "/isLoading")](getKey.call(this, key));
       },
       $startLoading: function $startLoading(key) {
         try {
           var _this2 = this;
 
-          return _awaitIgnored(_this2.$store.dispatch("".concat(moduleName, "/startLoading"), key));
+          return _awaitIgnored(_this2.$store.dispatch("".concat(moduleName, "/startLoading"), getKey.call(_this2, key)));
         } catch (e) {
           return Promise.reject(e);
         }
@@ -138,7 +150,7 @@ var createPluginMixin = (function (moduleName) {
         try {
           var _this4 = this;
 
-          return _awaitIgnored(_this4.$store.dispatch("".concat(moduleName, "/endLoading"), key));
+          return _awaitIgnored(_this4.$store.dispatch("".concat(moduleName, "/endLoading"), getKey.call(_this4, key)));
         } catch (e) {
           return Promise.reject(e);
         }
@@ -147,7 +159,7 @@ var createPluginMixin = (function (moduleName) {
         try {
           var _this6 = this;
 
-          return _awaitIgnored(_this6.$store.dispatch("".concat(moduleName, "/toggleLoading"), key));
+          return _awaitIgnored(_this6.$store.dispatch("".concat(moduleName, "/toggleLoading"), getKey.call(_this6, key)));
         } catch (e) {
           return Promise.reject(e);
         }
